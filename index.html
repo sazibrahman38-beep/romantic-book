@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>For Mimu ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Noto Serif Bengali", serif;
+      background: linear-gradient(135deg, #120014, #3b082f, #16001d);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -30px;
+      font-size: 22px;
+      animation: floatHeart linear forwards;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* Main */
+    .container {
+      width: 100%;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 18px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 25px;
+      animation: fadeDown 1.5s ease;
+    }
+
+    .title h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .title p {
+      font-size: 16px;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Book */
+    .book {
+      width: 100%;
+      min-height: 560px;
+      position: relative;
+      perspective: 1500px;
+      margin-top: 20px;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 560px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 35px 25px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #fff9fc, #ffe8f2);
+      color: #4b1734;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+      display: none;
+      transform-origin: left center;
+    }
+
+    .page.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: pageIn 0.8s ease;
+    }
+
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: rotateY(-20deg) scale(0.96);
+      }
+
+      to {
+        opacity: 1;
+        transform: rotateY(0) scale(1);
+      }
+    }
+
+    .page h2 {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .page p {
+      font-size: 18px;
+      line-height: 2;
+      text-align: center;
+    }
+
+    .page .big-heart {
+      font-size: 65px;
+      margin-bottom: 20px;
+      animation: heartbeat 1.4s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.18);
+      }
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 15px;
+      font-size: 13px;
+      opacity: 0.5;
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 30px;
+      padding: 13px 22px;
+      font-size: 16px;
+      cursor: pointer;
+      background: white;
+      color: #a51d62;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.07);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    /* Surprise section */
+    .surprise {
+      margin-top: 50px;
+      padding: 30px 15px;
+      text-align: center;
+    }
+
+    .surprise h2 {
+      font-size: 27px;
+      margin-bottom: 20px;
+    }
+
+    .photo-frame {
+      width: 250px;
+      height: 310px;
+      margin: 0 auto 25px;
+      padding: 8px;
+      background: white;
+      border-radius: 18px;
+      box-shadow:
+        0 0 20px rgba(255,255,255,0.4),
+        0 15px 40px rgba(0,0,0,0.4);
+      animation: photoGlow 2.5s infinite alternate;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+
+    @keyframes photoGlow {
+      from {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(255,255,255,0.3);
+      }
+
+      to {
+        transform: scale(1.04);
+        box-shadow: 0 0 35px rgba(255,130,190,0.7);
+      }
+    }
+
+    #message {
+      display: none;
+      margin: 25px auto 0;
+      max-width: 600px;
+      padding: 25px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    #message.show {
+      display: block;
+      animation: messageOpen 1.2s ease;
+    }
+
+    @keyframes messageOpen {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #message p {
+      font-size: 18px;
+      line-height: 2;
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: lineShow 1s forwards;
+    }
+
+    #message p:nth-child(1) { animation-delay: .3s; }
+    #message p:nth-child(2) { animation-delay: .8s; }
+    #message p:nth-child(3) { animation-delay: 1.3s; }
+    #message p:nth-child(4) { animation-delay: 1.8s; }
+    #message p:nth-child(5) { animation-delay: 2.3s; }
+    #message p:nth-child(6) { animation-delay: 2.8s; }
+    #message p:nth-child(7) { animation-delay: 3.5s; }
+
+    @keyframes lineShow {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .special {
+      font-weight: bold;
+      font-size: 20px !important;
+      margin-top: 20px;
+    }
+
+    .birthday {
+      margin-top: 50px;
+      text-align: center;
+      padding: 30px 15px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .birthday h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .birthday p {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .signature {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Mobile */
+    @media (max-width: 500px) {
+
+      .title h1 {
+        font-size: 25px;
+      }
+
+      .page {
+        min-height: 500px;
+        padding: 28px 18px;
+      }
+
+      .page h2 {
+        font-size: 24px;
+      }
+
+      .page p {
+        font-size: 16px;
+      }
+
+      .photo-frame {
+        width: 220px;
+        height: 280px;
+      }
+
+      #message p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Title -->
+    <div class="title">
+      <h1>একটা ছোট্ট সারপ্রাইজ ❤️</h1>
+      <p>শুধু তোমার জন্য, Mimu</p>
+    </div>
+
+
+    <!-- BOOK -->
+    <div class="book">
+
+      <!-- Page 1 -->
+      <div class="page active">
+        <div class="big-heart">❤️</div>
+
+        <h2>প্রিয় Mimu</h2>
+
+        <p>
+          এই ছোট্ট ওয়েবসাইটটা শুধু তোমার জন্য।
+          <br>
+          কিছু কথা আছে, যেগুলো হয়তো মুখে ঠিকভাবে বলতে পারি না।
+        </p>
+
+        <div class="page-number">Page 1</div>
+      </div>
+
+
+      <!-- Page 2 -->
+      <div class="page">
+        <div class="big-heart">🌸</div>
+
+        <h2>একটা কথা</h2>
+
+        <p>
+          জীবনে সবসময় সবকিছু perfect হয় না।
+          <br>
+          কখনো ভুল হয়, কখনো অভিমান হয়,
+          <br>
+          আবার কখনো দূরত্বও তৈরি হয়।
+        </p>
+
+        <div class="page-number">Page 2</div>
+      </div>
+
+
+      <!-- Page 3 -->
+      <div class="page">
+        <div class="big-heart">🥺</div>
+
+        <h2>তবুও...</h2>
+
+        <p>
+          আমি চাই আমাদের সুন্দর মুহূর্তগুলো
+          <br>
+          আমরা যেন কখনো ভুলে না যাই।
+          <br><br>
+          আমার ছোট ছোট ভুলগুলো
+          <br>
+          তুমি ক্ষমা করে দিও।
+        </p>
+
+        <div class="page-number">Page 3</div>
+      </div>
+
+
+      <!-- Page 4 -->
+      <div class="page">
+        <div class="big-heart">💖</div>
+
+        <h2>আজ আমার জন্মদিন</h2>
+
+        <p>
+          আজকের দিনে তোমার কাছে
+          <br>
+          আমার কোনো বড় কিছু চাওয়া নেই।
+          <br><br>
+          শুধু চাই,
+          <br>
+          তুমি আমার পাশে থেকো।
+        </p>
+
+        <div class="page-number">Page 4</div>
+      </div>
+
+    </div>
+
+
+    <!-- Book Buttons -->
+    <div class="buttons">
+      <button id="prevBtn">⬅️ আগের পৃষ্ঠা</button>
+      <button id="nextBtn">পরের পৃষ্ঠা ➡️</button>
+    </div>
+
+
+    <!-- SURPRISE -->
+    <div class="surprise">
+
+      <h2>💌 একটা শেষ কথা বলি?</h2>
+
+      <div class="photo-frame">
+
+        <img
+          src="IMG-20260705-WA0018.jpg"
+          alt="Our Memory"
+        >
+
+      </div>
+
+      <button id="openMessage">
+        💌 একটা কথা বলি?
+      </button>
+
+
+      <div id="message">
+
+        <p>
+          এই হাতটা কখনো ছেড়ো না… ❤️
+        </p>
+
+        <p>
+          তোমাকে নিয়ে এখনো অনেকটা পথ চলা বাকি।
+        </p>
+
+        <p>
+          জীবনের শেষ পর্যন্ত তোমার পাশে থাকতে চাই।
+        </p>
+
+        <p>
+          আমার ছোট ছোট ভুলগুলো তুমি ক্ষমা করে দিও।
+        </p>
+
+        <p>
+          সবসময় হয়তো ঠিকভাবে মনের কথাগুলো বলতে পারি না,
+          কিন্তু তুমি আমার কাছে সত্যিই অনেক গুরুত্বপূর্ণ।
+        </p>
+
+        <p class="special">
+          আজ আমার জন্মদিনে তোমার কাছে আমি কিছুই চাই না… ❤️
+          <br><br>
+          শুধু চাই, তুমি আমার হাতটা ধরে
+          <br>
+          আমার সঙ্গে এভাবেই জীবনের পথটা পাড়ি দাও।
+        </p>
+
+        <p>
+          সুখে-দুঃখে, হাসিতে-কান্নায়—
+          <br>
+          যতটা পথ বাকি আছে,
+          <br>
+          তোমাকে পাশে নিয়েই হাঁটতে চাই। ❤️
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- BIRTHDAY -->
+    <div class="birthday">
+
+      <div class="big-heart">🎂❤️</div>
+
+      <h2>আজ আমার জন্মদিন</h2>
+
+      <p>
+        জন্মদিনে অনেক কিছু পাওয়া যায়,
+        <br>
+        কিন্তু কিছু মানুষ পাওয়া যায়
+        <br>
+        যাদের মূল্য কোনো উপহারে মাপা যায় না।
+      </p>
+
+      <div class="signature">
+        তোমার জন্য সবসময় ❤️
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    /* Book Page System */
+
+    const pages = document.querySelectorAll(".page");
+
+    let currentPage = 0;
+
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+
+
+    function showPage(index) {
+
+      pages.forEach(function(page) {
+        page.classList.remove("active");
+      });
+
+      pages[index].classList.add("active");
+
+    }
+
+
+    nextBtn.addEventListener("click", function() {
+
+      if (currentPage < pages.length - 1) {
+
+        currentPage++;
+
+        showPage(currentPage);
+
+      }
+
+    });
+
+
+    prevBtn.addEventListener("click", function() {
+
+      if (currentPage > 0) {
+
+        currentPage--;
+
+        showPage(currentPage);
+
+      }
+
+    });
+
+
+    /* Surprise Message */
+
+    const openMessage =
+      document.getElementById("openMessage");
+
+    const message =
+      document.getElementById("message");
+
+
+    openMessage.addEventListener("click", function() {
+
+      message.classList.add("show");
+
+      openMessage.style.display = "none";
+
+    });
+
+
+    /* Floating Hearts */
+
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const hearts = ["❤️", "💖", "💕", "💗", "💓", "✨"];
+
+      heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+      heart.style.fontSize =
+        (15 + Math.random() * 20) + "px";
+
+      document.body.appendChild(heart);
+
+
+      setTimeout(function() {
+
+        heart.remove();
+
+      }, 10000);
+
+    }
+
+
+    setInterval(createHeart, 700);
+
+
+  </script>
+
+</body>
+  </html>
