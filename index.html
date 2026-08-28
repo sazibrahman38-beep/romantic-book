@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>একটা গল্প</title>
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #12000a, #350015, #17000d);
+      font-family: "Noto Sans Bengali", sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 750px;
+      margin: auto;
+      padding: 25px 18px;
+    }
+
+    .page {
+      display: none;
+      min-height: 90vh;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    .card {
+      width: 100%;
+      padding: 35px 25px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 35px rgba(255, 0, 80, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .story {
+      font-size: 19px;
+      line-height: 2;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    .first {
+      text-align: center;
+      font-size: 25px;
+      line-height: 1.8;
+      margin-bottom: 30px;
+    }
+
+    button {
+      border: none;
+      outline: none;
+      padding: 13px 35px;
+      border-radius: 50px;
+      background: #ff2f70;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 47, 112, 0.5);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .last {
+      text-align: center;
+      font-size: 24px;
+      line-height: 2;
+    }
+
+    .heart {
+      font-size: 55px;
+      margin-top: 20px;
+      animation: heartbeat 1.3s infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.25);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .story {
+        font-size: 17px;
+        line-height: 1.9;
+      }
+
+      .first {
+        font-size: 21px;
+      }
+
+      .card {
+        padding: 28px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- প্রথম পেজ -->
+    <section class="page active" id="page1">
+      <div class="card">
+        <div class="first">
+          তোমাকে একটা ছেলে আর একটা মেয়ের গল্প বলি শোনো
+        </div>
+
+        <div style="text-align:center;">
+          <button onclick="openStory()">Open ❤️</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- গল্প -->
+    <section class="page" id="page2">
+      <div class="card">
+        <div class="story">
+
+ছেলেটার জীবনে এর আগেও একটা ভালোবাসা এসেছিলো,
+
+কিন্তু এই মেয়েটি তার জীবনে আসার পর সে বুঝতে পারলো আসল ভালোবাসা কাকে বলে।
+
+আগের সবকিছু ভুলে সে মেয়েটিকে নিজের জীবনের চেয়েও বেশি ভালোবাসতে শুরু করলো। ❤️
+
+আর দশটা ছেলের মতো তার মাথাতেও ফ্যামিলি আর ক্যারিয়ারের চিন্তা ছিলো, কিন্তু সব চিন্তাকে ছাপিয়ে তার মনে একটা বড় ভয় ঢুকে গেলো মেয়েটিকে হারানোর ভয়।
+
+সম্পর্ক ঠিকঠাক থাকার পরেও ছেলেটা প্রায় রাতে ভাবতো,
+
+যদি মেয়েটি অন্য কারো হয়ে যায়? সে যদি অন্য কাউকে ভালবাসতে শুরু করে,
+
+অন্য কেউ তাকে ছোঁবে, এই চিন্তাটা ছেলেটা কোনোভাবেই সহ্য করতে পারতো না। 😔
+
+কষ্টে প্রায় রাতে ছেলেটা কান্না করতো,
+
+কিন্তু মেয়েটিকে এসব কিছুই বলতো না।
+
+সে তার প্রতিটা নামাজে, প্রতিটা সেজদায় আল্লাহর কাছে তাকে চাইতো। সে আল্লাহকে বলতো, হয় তাকে আমার জীবনসঙ্গী করে দাও,
+
+না হলে তার জীবনে অন্য কেউ আসার আগেই আমাকে দুনিয়া থেকে তুলে নাও।
+
+কারণ সে অন্য কারো হয়ে যাওয়ার আগেই ছেলেটার কাছে মরে যাওয়া তার কাছে অনেক শান্তির ছিল।
+
+এরই মাঝে একদিন একটা ছোট বিষয়ে ছেলেটা মেয়েটার ওপর একটু অভিমান করেছিলো।
+
+কয়েকদিন একটু কম কথা বলেছিলো।
+
+কিন্তু হুট করেই একদিন মেয়েটি বলে বসলো,
+
+আমাদের এই সম্পর্ক আর না বাড়ানোই ভালো।
+
+কথাটা শুনে ছেলেটার মাথায় যেন আকাশ ভেঙে পড়লো। 💔
+
+কিছু বুঝে ওঠার আগেই মেয়েটি তাকে সব জায়গা থেকে ব্লক করে দিলো।
+
+তখন ছেলেটার অবস্থা প্রায় পাগলের মত।
+
+ভাগ্য ভালো, একটা যোগাযোগের রাস্তা খোলা ছিলো।
+
+সেই পথ ধরে ছেলেটা অনেক বুঝিয়ে মেয়েটির রাগ ভাঙালো।
+
+মেয়েটি তাকে শেষ একটা সুযোগ দিল এবং তাদের সম্পর্ক আবার আগের মতো চলতে লাগলো।
+
+কিন্তু এবার ছেলেটার মনে আরো একটা নতুন ভয় বাসা বাঁধলো।
+
+সে সারাক্ষণ আতঙ্কে থাকে যদি আবার কোনো ভুল করে ফেলি? তাহলে তো তাকে চিরদিনের জন্য হারিয়ে ফেলবো।
+
+এই ভয়ের কারণে ছেলেটা এখন প্রতিটা কথা খুব ভেবেচিন্তে বলে।
+
+এমন কোনো কথা বলে না যাতে মেয়েটির মন খারাপ হয়।
+
+সে এখন আর মেয়েটির ওপর রাগ করে না, অভিমানও করে না।
+
+কারণ তার সামান্য রাগ বা অভিমানের কারণে যদি মেয়েটি আবার সম্পর্ক ভেঙে দিতে চায়, সেই কষ্ট সহ্য করতে পারবে না।
+
+সে মেয়েটিকে বড্ড ভালোবাসে, তাই নিজের সব রাগ-ক্ষোভ ভুলে মেয়েটার সব কথা মেনে চলে, সব আবদার চোখ বন্ধ করে শুনে যায়।
+
+কারণ সে এ সম্পর্কটিকে সারা জীবন টিকে রাখতে চাই। ❤️
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- শেষ পেজ -->
+    <section class="page" id="page3">
+      <div class="card">
+        <div class="last">
+          কারণ সে এ সম্পর্কটিকে সারা জীবন টিকে রাখতে চাই।
+
+          <div class="heart">❤️</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <script>
+    function openStory() {
+      document.getElementById("page1").classList.remove("active");
+      document.getElementById("page2").classList.add("active");
+    }
+  </script>
+
+</body>
+</html>
